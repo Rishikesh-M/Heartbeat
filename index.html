@@ -403,18 +403,53 @@ document.addEventListener('keydown',e=>{
   if(e.key==='Escape')document.getElementById('lightbox').classList.remove('open');
 });
 
-/* Optional music: paste a direct audio file URL into MUSIC_URL if desired. */
-const MUSIC_URL = '';
-let audio=null, playing=false;
-document.getElementById('musicBtn').addEventListener('click',()=>{
-  const btn=document.getElementById('musicBtn');
-  if(!MUSIC_URL){
-    alert('To add your song, open index.html and set MUSIC_URL to a direct .mp3/.ogg audio URL.');
+/* YouTube Background Music */
+const YT_VIDEO_ID = 'cNGjD0VG4R8';
+let ytPlayer = null, ytPlaying = false;
+
+// Load YouTube IFrame API
+const ytScript = document.createElement('script');
+ytScript.src = 'https://www.youtube.com/iframe_api';
+document.head.appendChild(ytScript);
+
+// Hidden container for the YouTube player
+const ytDiv = document.createElement('div');
+ytDiv.id = 'ytPlayer';
+ytDiv.style.cssText = 'position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none';
+document.body.appendChild(ytDiv);
+
+window.onYouTubeIframeAPIReady = function() {
+  ytPlayer = new YT.Player('ytPlayer', {
+    videoId: YT_VIDEO_ID,
+    playerVars: { autoplay: 0, loop: 1, playlist: YT_VIDEO_ID, controls: 0 },
+    events: {
+      onStateChange: function(e) {
+        // If video ended, replay (extra safety for looping)
+        if (e.data === YT.PlayerState.ENDED) {
+          ytPlayer.seekTo(0);
+          ytPlayer.playVideo();
+        }
+      }
+    }
+  });
+};
+
+document.getElementById('musicBtn').addEventListener('click', () => {
+  const btn = document.getElementById('musicBtn');
+  if (!ytPlayer || typeof ytPlayer.playVideo !== 'function') {
+    btn.textContent = '⏳';
+    setTimeout(() => { btn.textContent = '♫'; }, 1500);
     return;
   }
-  if(!audio){audio=new Audio(MUSIC_URL);audio.loop=true}
-  if(playing){audio.pause();playing=false;btn.textContent='♫'}
-  else{audio.play();playing=true;btn.textContent='❚❚'}
+  if (ytPlaying) {
+    ytPlayer.pauseVideo();
+    ytPlaying = false;
+    btn.textContent = '♫';
+  } else {
+    ytPlayer.playVideo();
+    ytPlaying = true;
+    btn.textContent = '❚❚';
+  }
 });
 </script>
 </body>
