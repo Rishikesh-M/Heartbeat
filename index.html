@@ -109,26 +109,61 @@ h1{
 }
 
 /* GALLERY */
-.gallery-toolbar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:25px}
-.filter{padding:9px 18px;border:1px solid var(--line);background:transparent;color:#d9cbd0;border-radius:999px}
-.filter.active{background:var(--pink);color:#250914;border-color:var(--pink)}
-.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(230px, 1fr));
+  gap:16px;
+}
 .media{
-  position:relative;min-height:260px;overflow:hidden;border-radius:20px;border:1px solid var(--line);
-  background:linear-gradient(145deg,#271623,#0e0b10);cursor:pointer;
+  position:relative;
+  aspect-ratio:1/1;
+  overflow:hidden;
+  border-radius:18px;
+  border:1px solid var(--line);
+  background:linear-gradient(145deg,#1c121e,#0b0810);
+  cursor:pointer;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease, border-color .35s ease;
 }
-.media img,.media video{width:100%;height:100%;min-height:260px;object-fit:cover;display:block}
-.media:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 45%,rgba(0,0,0,.72))}
-.media-info{position:absolute;left:16px;right:16px;bottom:14px;z-index:2;display:flex;justify-content:space-between;align-items:end}
-.media-info strong{font-family:Georgia,serif;font-size:1.05rem}.media-info small{color:#d8c5cc}
-.add-card{
-  min-height:260px;border:1px dashed rgba(255,167,193,.35);border-radius:20px;
-  display:flex;align-items:center;justify-content:center;text-align:center;color:#d8c5cc;padding:20px;
-  background:rgba(255,255,255,.02)
+.media:hover{
+  transform:translateY(-5px);
+  border-color:rgba(255,174,199,.55);
+  box-shadow:0 16px 36px rgba(255,142,174,.24),0 0 20px rgba(255,142,174,.15);
 }
-.add-icon{font-size:2.5rem;color:var(--pink);display:block;margin-bottom:8px}
-#mediaInput{display:none}
-.gallery-note{text-align:center;color:#9f8b93;margin-top:18px;font-size:.85rem}
+.media img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform .5s cubic-bezier(.2,.8,.2,1), filter .5s ease;
+}
+.media:hover img{
+  transform:scale(1.07);
+  filter:brightness(1.03);
+}
+.media-overlay{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:radial-gradient(circle at center, rgba(255,142,174,.18), rgba(9,7,12,.55) 80%);
+  opacity:0;
+  transition:opacity .35s ease;
+  pointer-events:none;
+}
+.media:hover .media-overlay{
+  opacity:1;
+}
+.heart-badge{
+  color:#fff;
+  font-size:2rem;
+  text-shadow:0 0 20px rgba(255,142,174,.95), 0 0 10px rgba(255,181,201,.8);
+  transform:scale(.6);
+  transition:transform .35s cubic-bezier(.175,.885,.32,1.275);
+}
+.media:hover .heart-badge{
+  transform:scale(1.1);
+}
 
 /* LETTER */
 .letter-wrap{display:grid;grid-template-columns:.75fr 1.25fr;gap:28px;align-items:stretch}
@@ -167,7 +202,7 @@ footer .script{font-size:1.7rem;display:block;margin-bottom:8px}
   .links.open{display:flex}.links a{text-align:center}
   .menu-btn{display:block}.nav-inner{gap:12px}.brand{margin-right:auto}
   .hero-grid{grid-template-columns:1fr}.hero-art{min-height:480px}.hero-copy{font-size:.96rem}
-  .gallery-grid{grid-template-columns:repeat(2,1fr)}
+  .gallery-grid{grid-template-columns:repeat(3,1fr);gap:12px}
   .letter-wrap{grid-template-columns:1fr}.letter-side{display:none}
 }
 @media(max-width:540px){
@@ -175,7 +210,9 @@ footer .script{font-size:1.7rem;display:block;margin-bottom:8px}
   h1{font-size:3.25rem;letter-spacing:-2px}.hero{padding-top:85px}
   .hero-art{min-height:430px;border-radius:24px}.couple{transform:translateX(-50%) scale(.82);bottom:22%}
   .quote-card{left:15px;bottom:15px}.stat{right:15px;bottom:18px}
-  .gallery-grid{grid-template-columns:1fr}.media,.media img,.media video,.add-card{min-height:310px}
+  .gallery-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .media{border-radius:14px}
+  .heart-badge{font-size:1.4rem}
   .letter-card{padding:42px 30px;min-height:590px}.letter-card h3{font-size:2.1rem}.letter-card p{font-size:1.18rem}
 }
 </style>
@@ -225,58 +262,58 @@ footer .script{font-size:1.7rem;display:block;margin-bottom:8px}
       <p>Every picture holds a moment. Every smile keeps a little piece of our story alive.</p>
     </div>
     <div class="gallery-grid" id="galleryGrid">
-      <div class="media reveal" data-type="photo"><img src="photos/1.jpg" alt="Memory 1" loading="lazy"><div class="media-info"><div><strong>Memory 1</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/2.jpg" alt="Memory 2" loading="lazy"><div class="media-info"><div><strong>Memory 2</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/3.jpg" alt="Memory 3" loading="lazy"><div class="media-info"><div><strong>Memory 3</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/4.jpg" alt="Memory 4" loading="lazy"><div class="media-info"><div><strong>Memory 4</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/5.jpg" alt="Memory 5" loading="lazy"><div class="media-info"><div><strong>Memory 5</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/6.jpg" alt="Memory 6" loading="lazy"><div class="media-info"><div><strong>Memory 6</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/7.jpg" alt="Memory 7" loading="lazy"><div class="media-info"><div><strong>Memory 7</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/8.jpg" alt="Memory 8" loading="lazy"><div class="media-info"><div><strong>Memory 8</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/9.jpg" alt="Memory 9" loading="lazy"><div class="media-info"><div><strong>Memory 9</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/10.jpg" alt="Memory 10" loading="lazy"><div class="media-info"><div><strong>Memory 10</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/11.jpg" alt="Memory 11" loading="lazy"><div class="media-info"><div><strong>Memory 11</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/12.jpg" alt="Memory 12" loading="lazy"><div class="media-info"><div><strong>Memory 12</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/13.jpg" alt="Memory 13" loading="lazy"><div class="media-info"><div><strong>Memory 13</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/14.jpg" alt="Memory 14" loading="lazy"><div class="media-info"><div><strong>Memory 14</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/15.jpg" alt="Memory 15" loading="lazy"><div class="media-info"><div><strong>Memory 15</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/16.jpg" alt="Memory 16" loading="lazy"><div class="media-info"><div><strong>Memory 16</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/17.jpg" alt="Memory 17" loading="lazy"><div class="media-info"><div><strong>Memory 17</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/18.jpg" alt="Memory 18" loading="lazy"><div class="media-info"><div><strong>Memory 18</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/19.jpg" alt="Memory 19" loading="lazy"><div class="media-info"><div><strong>Memory 19</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/20.jpg" alt="Memory 20" loading="lazy"><div class="media-info"><div><strong>Memory 20</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/21.jpg" alt="Memory 21" loading="lazy"><div class="media-info"><div><strong>Memory 21</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/22.jpg" alt="Memory 22" loading="lazy"><div class="media-info"><div><strong>Memory 22</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/23.jpg" alt="Memory 23" loading="lazy"><div class="media-info"><div><strong>Memory 23</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/24.jpg" alt="Memory 24" loading="lazy"><div class="media-info"><div><strong>Memory 24</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/25.jpg" alt="Memory 25" loading="lazy"><div class="media-info"><div><strong>Memory 25</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/26.jpg" alt="Memory 26" loading="lazy"><div class="media-info"><div><strong>Memory 26</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/27.jpg" alt="Memory 27" loading="lazy"><div class="media-info"><div><strong>Memory 27</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/28.jpg" alt="Memory 28" loading="lazy"><div class="media-info"><div><strong>Memory 28</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/29.jpg" alt="Memory 29" loading="lazy"><div class="media-info"><div><strong>Memory 29</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/30.jpg" alt="Memory 30" loading="lazy"><div class="media-info"><div><strong>Memory 30</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/31.jpg" alt="Memory 31" loading="lazy"><div class="media-info"><div><strong>Memory 31</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/32.jpg" alt="Memory 32" loading="lazy"><div class="media-info"><div><strong>Memory 32</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/33.jpg" alt="Memory 33" loading="lazy"><div class="media-info"><div><strong>Memory 33</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/34.jpg" alt="Memory 34" loading="lazy"><div class="media-info"><div><strong>Memory 34</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/35.jpg" alt="Memory 35" loading="lazy"><div class="media-info"><div><strong>Memory 35</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/36.jpg" alt="Memory 36" loading="lazy"><div class="media-info"><div><strong>Memory 36</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/37.jpg" alt="Memory 37" loading="lazy"><div class="media-info"><div><strong>Memory 37</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/38.jpg" alt="Memory 38" loading="lazy"><div class="media-info"><div><strong>Memory 38</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/39.jpg" alt="Memory 39" loading="lazy"><div class="media-info"><div><strong>Memory 39</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/40.jpg" alt="Memory 40" loading="lazy"><div class="media-info"><div><strong>Memory 40</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/41.jpg" alt="Memory 41" loading="lazy"><div class="media-info"><div><strong>Memory 41</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/42.jpg" alt="Memory 42" loading="lazy"><div class="media-info"><div><strong>Memory 42</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/43.jpg" alt="Memory 43" loading="lazy"><div class="media-info"><div><strong>Memory 43</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/44.jpg" alt="Memory 44" loading="lazy"><div class="media-info"><div><strong>Memory 44</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/45.jpg" alt="Memory 45" loading="lazy"><div class="media-info"><div><strong>Memory 45</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/46.jpg" alt="Memory 46" loading="lazy"><div class="media-info"><div><strong>Memory 46</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/47.jpg" alt="Memory 47" loading="lazy"><div class="media-info"><div><strong>Memory 47</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/48.jpg" alt="Memory 48" loading="lazy"><div class="media-info"><div><strong>Memory 48</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/49.jpg" alt="Memory 49" loading="lazy"><div class="media-info"><div><strong>Memory 49</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/50.jpg" alt="Memory 50" loading="lazy"><div class="media-info"><div><strong>Memory 50</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/51.jpg" alt="Memory 51" loading="lazy"><div class="media-info"><div><strong>Memory 51</strong></div><span>♥</span></div></div>
-      <div class="media reveal" data-type="photo"><img src="photos/52.jpg" alt="Memory 52" loading="lazy"><div class="media-info"><div><strong>Memory 52</strong></div><span>♥</span></div></div>
+      <div class="media reveal"><img src="photos/1.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/2.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/3.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/4.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/5.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/6.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/7.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/8.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/9.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/10.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/11.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/12.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/13.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/14.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/15.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/16.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/17.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/18.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/19.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/20.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/21.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/22.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/23.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/24.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/25.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/26.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/27.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/28.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/29.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/30.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/31.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/32.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/33.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/34.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/35.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/36.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/37.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/38.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/39.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/40.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/41.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/42.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/43.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/44.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/45.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/46.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/47.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/48.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/49.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/50.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/51.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
+      <div class="media reveal"><img src="photos/52.jpg" alt="Our Story" loading="lazy"><div class="media-overlay"><span class="heart-badge">♥</span></div></div>
     </div>
   </div>
 </section>
