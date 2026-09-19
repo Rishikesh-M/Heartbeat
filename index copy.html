@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#09070b">
+<title>Our Story — Happy Anniversary ♡</title>
+<style>
+:root{
+  --bg:#08070b; --panel:rgba(20,13,22,.72); --panel2:rgba(35,18,31,.62);
+  --pink:#ff8eae; --pink2:#ffb5c9; --text:#fff4f7; --muted:#d5bec7;
+  --line:rgba(255,174,199,.20); --shadow:0 25px 70px rgba(0,0,0,.45);
+  --radius:24px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--bg);color:var(--text);overflow-x:hidden;
+}
+body:before{
+  content:"";position:fixed;inset:0;z-index:-3;
+  background:
+    radial-gradient(circle at 75% 20%,rgba(166,45,91,.28),transparent 30%),
+    radial-gradient(circle at 15% 80%,rgba(103,44,91,.22),transparent 30%),
+    linear-gradient(135deg,#050509,#100911 48%,#09070b);
+}
+body:after{
+  content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.18;
+  background-image:radial-gradient(#fff 1px,transparent 1px);background-size:90px 90px;
+}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+button{cursor:pointer}
+.container{width:min(1180px,92%);margin:auto}
+
+/* NAV */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  background:linear-gradient(180deg,rgba(5,4,7,.92),rgba(5,4,7,.42),transparent);
+  backdrop-filter:blur(12px);
+}
+.nav-inner{height:76px;display:flex;align-items:center;gap:28px}
+.brand{display:flex;align-items:center;gap:11px;font-family:Georgia,serif;font-style:italic;font-size:1.1rem;white-space:nowrap}
+.heart{color:var(--pink);font-size:1.65rem;text-shadow:0 0 20px rgba(255,128,165,.7)}
+.links{display:flex;gap:8px;margin-left:auto}
+.links a{
+  padding:10px 16px;border-radius:999px;color:#d9cbd0;font-size:.88rem;transition:.25s;
+}
+.links a:hover,.links a.active{color:#fff;background:rgba(255,142,174,.08)}
+.links a.active{box-shadow:inset 0 -2px var(--pink)}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.icon-btn{
+  width:42px;height:42px;border:1px solid var(--line);background:rgba(255,255,255,.04);
+  color:#fff;border-radius:50%;
+}
+.menu-btn{display:none}
+
+/* SECTIONS */
+section{min-height:100svh;padding:110px 0 70px;position:relative}
+.hero{display:flex;align-items:center;min-height:100svh;padding-top:100px}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+.kicker{letter-spacing:5px;font-size:.72rem;color:var(--pink2);text-transform:uppercase;margin-bottom:18px}
+h1{
+  font-family:Georgia,"Times New Roman",serif;font-size:clamp(3.3rem,7vw,6.8rem);
+  line-height:.91;font-weight:500;letter-spacing:-4px;
+}
+.script{font-family:"Brush Script MT","Segoe Script",cursive;font-weight:400;color:var(--pink)}
+.hero-copy{font-size:1.05rem;color:var(--muted);line-height:1.8;max-width:590px;margin:25px 0}
+.btns{display:flex;gap:13px;flex-wrap:wrap}
+.btn{
+  border:1px solid rgba(255,166,193,.45);border-radius:999px;padding:14px 22px;
+  color:#fff;background:rgba(255,255,255,.04);transition:.25s;box-shadow:0 0 0 transparent;
+}
+.btn.primary{background:linear-gradient(135deg,#ff7fa4,#ffabc2);color:#260914;border:none;box-shadow:0 12px 40px rgba(255,105,145,.22)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 35px rgba(255,105,145,.2)}
+.hero-art{
+  min-height:590px;border:1px solid var(--line);border-radius:34px;position:relative;overflow:hidden;
+  box-shadow:var(--shadow);background:
+    radial-gradient(circle at 50% 42%,rgba(255,128,164,.42),transparent 19%),
+    linear-gradient(180deg,rgba(13,9,20,.12),rgba(8,5,10,.92)),
+    linear-gradient(160deg,#1a1626 5%,#5d2446 48%,#100a13 82%);
+}
+.moon{position:absolute;width:65px;height:65px;border-radius:50%;right:18%;top:15%;background:#ffe5e9;box-shadow:0 0 50px rgba(255,220,230,.5)}
+.horizon{position:absolute;bottom:28%;left:-10%;right:-10%;height:28%;background:linear-gradient(160deg,#251323,#08070b);border-radius:50% 50% 0 0/20% 20% 0 0;filter:blur(1px)}
+.city{position:absolute;bottom:25%;left:0;right:0;height:17%;opacity:.55;background:repeating-linear-gradient(90deg,transparent 0 17px,#151018 18px 42px)}
+.couple{position:absolute;left:50%;bottom:24%;transform:translateX(-50%);width:250px;height:260px}
+.couple:before,.couple:after{content:"";position:absolute;bottom:0;border-radius:50% 50% 10% 10%;background:#09070b}
+.couple:before{width:145px;height:230px;left:18px}
+.couple:after{width:170px;height:245px;right:0}
+.couple i,.couple b{position:absolute;background:#09070b;border-radius:50%;display:block;z-index:2}
+.couple i{width:72px;height:72px;left:53px;top:0}
+.couple b{width:78px;height:78px;right:48px;top:-7px}
+.quote-card{
+  position:absolute;left:28px;bottom:28px;padding:18px 20px;border:1px solid var(--line);
+  background:rgba(10,7,12,.65);backdrop-filter:blur(12px);border-radius:18px;max-width:230px;
+  font-family:"Brush Script MT","Segoe Script",cursive;font-size:1.25rem;color:#ffd0dc;
+}
+.stat{position:absolute;right:25px;bottom:30px;text-align:right;color:#cdbbc2;font-size:.72rem;letter-spacing:2px}
+.infinity{font-size:3rem;color:#fff}
+
+/* COMMON */
+.section-head{text-align:center;margin-bottom:38px}
+.section-head h2{font:500 clamp(2.5rem,5vw,4.6rem)/1 Georgia,serif;letter-spacing:-2px}
+.section-head p{color:var(--muted);margin:14px auto 0;max-width:650px;line-height:1.7}
+.glass{
+  background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.025));
+  border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);backdrop-filter:blur(14px);
+}
+
+/* GALLERY */
+.gallery-toolbar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:25px}
+.filter{padding:9px 18px;border:1px solid var(--line);background:transparent;color:#d9cbd0;border-radius:999px}
+.filter.active{background:var(--pink);color:#250914;border-color:var(--pink)}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.gallery-card{
+  position:relative;min-height:260px;overflow:hidden;border-radius:20px;border:1px solid var(--line);
+  background:linear-gradient(145deg,#271623,#0e0b10);cursor:pointer;
+}
+.gallery-card img,.gallery-card video{
+  width:100%;height:100%;min-height:260px;object-fit:cover;display:block;
+}
+.gallery-card video{background:#0b080d}
+.gallery-overlay{
+  position:absolute;left:0;right:0;bottom:0;z-index:2;padding:42px 16px 15px;
+  background:linear-gradient(transparent,rgba(0,0,0,.82));pointer-events:none;
+}
+.gallery-overlay strong{display:block;font-family:Georgia,serif;font-size:1.05rem}
+.gallery-overlay small{display:block;color:#d8c5cc;margin-top:3px}
+
+/* LETTER */
+.letter-wrap{display:grid;grid-template-columns:.75fr 1.25fr;gap:28px;align-items:stretch}
+.letter-side{padding:35px;display:flex;flex-direction:column;justify-content:center}
+.letter-side h3{font:500 2.3rem Georgia,serif;margin-bottom:15px}.letter-side p{color:var(--muted);line-height:1.8}
+.flower{font-size:4rem;margin-bottom:18px}
+.letter-card{
+  min-height:600px;padding:55px 55px 50px;position:relative;overflow:hidden;
+  background:linear-gradient(145deg,#f4d6d3,#dfafb8);color:#4a202e;
+  border-radius:24px;box-shadow:0 30px 90px rgba(0,0,0,.45);transform:rotate(.4deg);
+}
+.letter-card:before{
+  content:"";position:absolute;inset:18px;border:1px solid rgba(110,46,65,.18);pointer-events:none
+}
+.letter-card h3{font:500 2.6rem Georgia,serif;margin-bottom:25px}
+.letter-card p{font-family:"Brush Script MT","Segoe Script",cursive;font-size:1.35rem;line-height:1.75}
+.signature{margin-top:28px;font-size:1.8rem!important;text-align:right;color:#702d45}
+.seal{position:absolute;right:28px;bottom:24px;font-size:2.5rem}
+
+/* FOOTER */
+footer{padding:45px 0 55px;text-align:center;border-top:1px solid var(--line);color:#9f8c94}
+footer .script{font-size:1.7rem;display:block;margin-bottom:8px}
+
+/* LIGHTBOX */
+.lightbox{position:fixed;inset:0;background:rgba(2,1,4,.92);z-index:100;display:none;align-items:center;justify-content:center;padding:25px}
+.lightbox.open{display:flex}.lightbox-content{max-width:min(1000px,94vw);max-height:90vh;position:relative}
+.lightbox img,.lightbox video{max-width:100%;max-height:86vh;border-radius:18px;border:1px solid var(--line)}
+.close{position:absolute;right:-12px;top:-12px;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:#1a0d15;color:#fff;z-index:2}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(25px);transition:.7s ease}.reveal.visible{opacity:1;transform:none}
+
+/* MOBILE */
+@media(max-width:850px){
+  .links{position:absolute;top:76px;left:4%;right:4%;display:none;flex-direction:column;padding:12px;background:rgba(12,8,14,.95);border:1px solid var(--line);border-radius:18px;backdrop-filter:blur(18px)}
+  .links.open{display:flex}.links a{text-align:center}
+  .menu-btn{display:block}.nav-inner{gap:12px}.brand{margin-right:auto}
+  .hero-grid{grid-template-columns:1fr}.hero-art{min-height:480px}.hero-copy{font-size:.96rem}
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}
+  .letter-wrap{grid-template-columns:1fr}.letter-side{display:none}
+}
+@media(max-width:540px){
+  section{padding:95px 0 55px}.nav-inner{height:68px}
+  h1{font-size:3.25rem;letter-spacing:-2px}.hero{padding-top:85px}
+  .hero-art{min-height:430px;border-radius:24px}.couple{transform:translateX(-50%) scale(.82);bottom:22%}
+  .quote-card{left:15px;bottom:15px}.stat{right:15px;bottom:18px}
+  .gallery-grid{grid-template-columns:1fr}.gallery-card,.gallery-card img,.gallery-card video{min-height:310px}
+  .letter-card{padding:42px 30px;min-height:590px}.letter-card h3{font-size:2.1rem}.letter-card p{font-size:1.18rem}
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="#home"><span class="heart">♥</span> Our Story ♡</a>
+    <nav class="links" id="links">
+      <a href="#home" class="active">Home</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#letter">Letter</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="musicBtn" title="Play music">♫</button>
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section id="home" class="hero">
+  <div class="container hero-grid">
+    <div class="reveal">
+      <div class="kicker">Happy Anniversary</div>
+      <h1>To My<br><span class="script">Favorite Person</span> ♡</h1>
+      <p class="hero-copy">Thank you for being the reason my days feel brighter, my heart feels lighter, and my life feels so much better.</p>
+      <div class="btns">
+        <a class="btn primary" href="#gallery">Open Our Memories →</a>
+        <a class="btn" href="#letter">Read My Letter ♡</a>
+      </div>
+    </div>
+    <div class="hero-art reveal">
+      <div class="moon"></div><div class="horizon"></div><div class="city"></div>
+      <div class="couple"><i></i><b></b></div>
+      <div class="quote-card">Same people.<br>Different days.<br>Still you ♡</div>
+      <div class="stat">ANOTHER YEAR OF US<div class="infinity">∞</div>AND STILL COUNTING...</div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="kicker">Our Memories</div>
+      <h2>A Collection <span class="script">of Us ♡</span></h2>
+      <p>Every picture holds a moment. Every video keeps a little piece of our story alive.</p>
+    </div>
+    <div class="gallery-toolbar reveal">
+      <button class="filter active" data-filter="all">All</button>
+      <button class="filter" data-filter="photo">Photos</button>
+      <button class="filter" data-filter="video">Videos</button>
+    </div>
+    <div class="gallery-grid" id="galleryGrid">
+      <div class="gallery-card">
+        <img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%23521f3d'/%3E%3Cstop offset='1' stop-color='%2308060b'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='600' fill='url(%23g)'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' font-size='130' fill='%23ff9fba'%3E%E2%99%A1%3C/text%3E%3C/svg%3E" alt="Our First Chapter">
+        <div class="gallery-overlay"><strong>Our First Chapter</strong><small>A memory worth keeping</small></div>
+      </div>
+
+      <div class="gallery-card">
+        <img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%23712d50'/%3E%3Cstop offset='1' stop-color='%23160d20'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='600' fill='url(%23g)'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' font-size='120' fill='%23ffd0dc'%3E%E2%88%9E%3C/text%3E%3C/svg%3E" alt="Same Hearts">
+        <div class="gallery-overlay"><strong>Same Hearts</strong><small>Two hearts, one story</small></div>
+      </div>
+
+      <div class="gallery-card">
+        <img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Cdefs%3E%3CradialGradient id='g'%3E%3Cstop stop-color='%23ffc2cf'/%3E%3Cstop offset='.25' stop-color='%23302034'/%3E%3Cstop offset='1' stop-color='%23100b12'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='800' height='600' fill='url(%23g)'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' font-size='120' fill='%23fff0f4'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E" alt="Little Moments">
+        <div class="gallery-overlay"><strong>Little Moments</strong><small>The ones I remember most</small></div>
+      </div>
+
+      <div class="gallery-card">
+        <img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop stop-color='%23351c45'/%3E%3Cstop offset='1' stop-color='%230b0a11'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='600' fill='url(%23g)'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' font-size='100' fill='%23e7c7ff'%3E%E2%98%BE%20%E2%9C%A6%3C/text%3E%3C/svg%3E" alt="Under The Same Sky">
+        <div class="gallery-overlay"><strong>Under The Same Sky</strong><small>Always somewhere together</small></div>
+      </div>
+
+      <div class="gallery-card">
+        <img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%235a263d'/%3E%3Cstop offset='1' stop-color='%23120a13'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='600' fill='url(%23g)'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' font-size='130' fill='%23ffb2c8'%3E%E2%99%A1%3C/text%3E%3C/svg%3E" alt="Our Safe Place">
+        <div class="gallery-overlay"><strong>Our Safe Place</strong><small>Where everything feels right</small></div>
+      </div>
+
+      <div class="gallery-card">
+        <img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%23251c40'/%3E%3Cstop offset='1' stop-color='%230d0b13'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='600' fill='url(%23g)'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' font-size='120' fill='%23e3c7ff'%3E%E2%9C%A7%3C/text%3E%3C/svg%3E" alt="Another Adventure">
+        <div class="gallery-overlay"><strong>Another Adventure</strong><small>More memories to make</small></div>
+      </div>
+
+      <div class="gallery-card video-card">
+        <video controls playsinline preload="metadata" poster="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23150d19'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' font-size='110' fill='%23ff9fba'%3E%E2%96%B6%3C/text%3E%3C/svg%3E">
+          <!-- Replace with your video file -->
+          <source src="" type="video/mp4">
+        </video>
+        <div class="gallery-overlay"><strong>Our Little Video</strong><small>Replace with your favorite video</small></div>
+      </div>
+
+      <div class="gallery-card video-card">
+        <video controls playsinline preload="metadata" poster="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23211938'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' font-size='110' fill='%23ffd0dc'%3E%E2%96%B6%3C/text%3E%3C/svg%3E">
+          <!-- Replace with your video file -->
+          <source src="" type="video/mp4">
+        </video>
+        <div class="gallery-overlay"><strong>Our Memories</strong><small>A moment in motion ♡</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="letter">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="kicker">A Letter For You</div>
+      <h2>Straight <span class="script">from My Heart ♡</span></h2>
+      <p>A little surprise, written just for the person who means the most to me.</p>
+    </div>
+    <div class="letter-wrap">
+      <div class="glass letter-side reveal">
+        <div class="flower">🌹</div>
+        <h3>For you,<br>always.</h3>
+        <p>This little corner of the internet is a collection of the moments, feelings, and memories I never want to lose.</p>
+        <br><p class="script" style="font-size:1.5rem;color:var(--pink)">Same hearts. Brighter tomorrows.</p>
+      </div>
+      <article class="letter-card reveal">
+        <h3>My Love,</h3>
+        <p>
+          I just wanted to take a moment to tell you how much you mean to me.
+          You make my life brighter, my days happier, and my heart fuller.
+          I'm so grateful to have you in my life, and I can't imagine this journey without you.
+          <br><br>
+          Thank you for being you — kind, caring, beautiful, and always there.
+          Here's to every laugh, every little adventure, every late-night conversation,
+          and all the memories we are still going to create together.
+          <br><br>
+          I love you, today and always. ♡
+        </p>
+        <p class="signature">Yours Always, ♡</p>
+        <div class="seal">♡</div>
+      </article>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <span class="script">You make ordinary days feel extraordinary ♡</span>
+  Made with love · Our Story · Always Us ∞
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-content" id="lightboxContent"></div>
+</div>
+
+<script>
+const navLinks = [...document.querySelectorAll('.links a')];
+const menuBtn = document.getElementById('menuBtn');
+const links = document.getElementById('links');
+
+menuBtn.addEventListener('click',()=>links.classList.toggle('open'));
+navLinks.forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
+
+const sections = [...document.querySelectorAll('main section')];
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+entry.target.id));
+    }
+  });
+},{rootMargin:'-40% 0px -50% 0px',threshold:0});
+sections.forEach(s=>observer.observe(s));
+
+const revealObserver = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
+
+/* Gallery filters */
+const filters = document.querySelectorAll('.filter');
+const cards = ()=>document.querySelectorAll('#galleryGrid .gallery-card');
+filters.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    filters.forEach(x=>x.classList.remove('active')); btn.classList.add('active');
+    const f=btn.dataset.filter;
+    cards().forEach(card=>{
+      const isVideo=!!card.querySelector('video');
+      const match=f==='all'||(f==='photo'&&!isVideo)||(f==='video'&&isVideo);
+      card.style.display=match?'block':'none';
+    });
+  });
+});
+
+/* Lightbox */
+document.getElementById('galleryGrid').addEventListener('click',e=>{
+  const card=e.target.closest('.gallery-card'); if(!card)return;
+  const source=card.querySelector('img,video');
+  if(!source)return; // built-in decorative cards don't need a lightbox
+  const box=document.getElementById('lightbox'), content=document.getElementById('lightboxContent');
+  content.innerHTML='';
+  const clone=source.cloneNode(true);
+  if(clone.tagName==='VIDEO')clone.controls=true;
+  content.appendChild(clone); box.classList.add('open');
+});
+document.getElementById('lightbox').addEventListener('click',e=>{
+  if(e.target.id==='lightbox')e.currentTarget.classList.remove('open');
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape')document.getElementById('lightbox').classList.remove('open');
+});
+
+/* Optional music: paste a direct audio file URL into MUSIC_URL if desired. */
+const MUSIC_URL = '';
+let audio=null, playing=false;
+document.getElementById('musicBtn').addEventListener('click',()=>{
+  const btn=document.getElementById('musicBtn');
+  if(!MUSIC_URL){
+    alert('To add your song, open index.html and set MUSIC_URL to a direct .mp3/.ogg audio URL.');
+    return;
+  }
+  if(!audio){audio=new Audio(MUSIC_URL);audio.loop=true}
+  if(playing){audio.pause();playing=false;btn.textContent='♫'}
+  else{audio.play();playing=true;btn.textContent='❚❚'}
+});
+</script>
+</body>
+</html>
